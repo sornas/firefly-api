@@ -1,15 +1,11 @@
 package net.sornas.firefly.http.volley;
 
 import android.content.Context;
-import android.util.Log;
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
-import net.sornas.firefly.MainActivity;
-import net.sornas.firefly.http.AccountResponse;
 import net.sornas.firefly.http.HttpCallback;
 
 import java.util.HashMap;
@@ -55,7 +51,7 @@ public class FireflyRequester {
                         StringRequest nextRequest = new StringRequest(
                                 method,
                                 response.links.next,
-                                r -> callback.onSuccess(r),
+                                callback::onSuccess,
                                 e -> {})
                         {
                             @Override

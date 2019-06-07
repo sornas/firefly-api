@@ -10,59 +10,65 @@ import java.util.List;
 
 public class AccountResponse {
     private List<AccountObject> data;
+
     private class AccountObject {
         String type;
         String id;
         AccountAttributes attributes;
     }
+
     private class AccountAttributes {
-    //    String created_at;
-    //    String updated_at;
+        //    String created_at;
+        //    String updated_at;
         boolean active;
         String name;
         String type;
         String account_role;
-    //    int currency_id;
-    //    String currency_code;
+        //    int currency_id;
+        //    String currency_code;
         String currency_symbol;
         int currency_decimal_places;
         double current_balance;
-    //    String current_balance_date;
-    //    String notes;
-    //    String montly_payment_date;
-    //    String credit_card_type;
+        //    String current_balance_date;
+        //    String notes;
+        //    String montly_payment_date;
+        //    String credit_card_type;
         int account_number;
-    //    int iban;
-    //    int bic;
-    //    int virtual_balance;
-    //    int opening_balance;
-    //    String opening_balance_date;
-    //    String liability_type;
-    //    int liability_amount;
-    //    String liability_start_date;
-    //    double interest;
-    //    String interest_period;
+        //    int iban;
+        //    int bic;
+        //    int virtual_balance;
+        //    int opening_balance;
+        //    String opening_balance_date;
+        //    String liability_type;
+        //    int liability_amount;
+        //    String liability_start_date;
+        //    double interest;
+        //    String interest_period;
         boolean include_net_worth;
     }
 
-    private List<Account>         accounts;
-    private List<AssetAccount>    assetAccounts;
-    private List<FlowAccount>     flowAccounts;
-    private List<RevenueAccount>  revenueAccounts;
-    private List<ExpenseAccount>  expenseAccounts;
+    private List<Account> accounts;
+    private List<AssetAccount> assetAccounts;
+    private List<FlowAccount> flowAccounts;
+    private List<RevenueAccount> revenueAccounts;
+    private List<ExpenseAccount> expenseAccounts;
 
     public List<Account> getAccounts() {
         return accounts;
     }
+
     public List<AssetAccount> getAssetAccounts() {
         return assetAccounts;
     }
+
     public List<FlowAccount> getFlowAccounts() {
         return flowAccounts;
     }
+
     public List<RevenueAccount> getRevenueAccounts() {
         return revenueAccounts;
     }
+
     public List<ExpenseAccount> getExpenseAccounts() {
         return expenseAccounts;
     }
@@ -70,7 +76,7 @@ public class AccountResponse {
     public static AccountResponse readJson(String json) {
         AccountResponse responseObject = new Gson().fromJson(json, AccountResponse.class);
         List<Account> accounts = new ArrayList<>();
-        for (AccountObject accountObject: responseObject.data) {
+        for (AccountObject accountObject : responseObject.data) {
             AccountAttributes attributes = accountObject.attributes;
             Account account = null;
             switch (attributes.type) {
@@ -135,18 +141,8 @@ public class AccountResponse {
 
         return response;
     }
-
-    public void concat(AccountResponse response2) {
-        if (this.equals(response2))
-            return;
-        accounts        .addAll(response2.getAccounts());
-        assetAccounts   .addAll(response2.getAssetAccounts());
-        flowAccounts    .addAll(response2.getFlowAccounts());
-        expenseAccounts .addAll(response2.getExpenseAccounts());
-        revenueAccounts .addAll(response2.getRevenueAccounts());
-    }
-
 }
+
 /*
 {
    "data": [

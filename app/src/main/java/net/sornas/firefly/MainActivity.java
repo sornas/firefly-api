@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import net.sornas.firefly.api.account.Account;
 import net.sornas.firefly.http.AccountResponse;
-import net.sornas.firefly.http.HttpCallback;
 import net.sornas.firefly.http.volley.FireflyRequester;
 
 import java.util.LinkedList;
@@ -38,13 +37,10 @@ public class MainActivity extends AppCompatActivity {
 
         FireflyRequester requester = new FireflyRequester(this);
         
-        requester.listAccounts(new HttpCallback() {
-            @Override
-            public void onSuccess(String s) {
-                AccountResponse response = AccountResponse.readJson(s);
-                accounts.addAll(response.getAccounts());
-                Log.d(TAG, "Added " + response.getAccounts().size() + " accounts");
-            }
+        requester.listAccounts(s -> {
+            AccountResponse response = AccountResponse.readJson(s);
+            accounts.addAll(response.getAccounts());
+            Log.d(TAG, "Added " + response.getAccounts().size() + " accounts");
         });
 
     }
