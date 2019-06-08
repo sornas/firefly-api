@@ -10,8 +10,8 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import net.sornas.firefly.api.account.Account;
 import net.sornas.firefly.http.AccountResponse;
-import net.sornas.firefly.http.volley.FireflyRequester;
-import net.sornas.firefly.http.volley.VolleyRequest;
+import net.sornas.firefly.volley.FireflyRequester;
+import net.sornas.firefly.volley.VolleyRequest;
 
 import java.util.LinkedList;
 import java.util.List;

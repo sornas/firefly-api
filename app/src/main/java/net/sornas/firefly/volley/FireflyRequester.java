@@ -1,4 +1,4 @@
-package net.sornas.firefly.http.volley;
+package net.sornas.firefly.volley;
 
 import android.content.Context;
 import com.android.volley.RequestQueue;
