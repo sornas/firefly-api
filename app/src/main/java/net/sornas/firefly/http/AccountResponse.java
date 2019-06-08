@@ -1,8 +1,6 @@
 package net.sornas.firefly.http;
 
-import android.util.Log;
 import com.google.gson.Gson;
-import net.sornas.firefly.MainActivity;
 import net.sornas.firefly.api.account.*;
 
 import java.util.ArrayList;
@@ -104,8 +102,7 @@ public class AccountResponse {
                     break;
             }
             if (account == null) {
-                Log.e(MainActivity.TAG, "Couldn't find type '" + attributes.type + "'");
-                continue;
+                throw new IllegalStateException("Couldn't find type " + attributes.type);
             }
             account.setName(attributes.name);
             account.setAccountNumber(attributes.account_number);
