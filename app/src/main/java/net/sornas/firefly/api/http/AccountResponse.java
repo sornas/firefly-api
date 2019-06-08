@@ -1,9 +1,10 @@
-package net.sornas.firefly.http;
+package net.sornas.firefly.api.http;
 
 import com.google.gson.Gson;
 import net.sornas.firefly.api.account.*;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class AccountResponse {
@@ -73,7 +74,7 @@ public class AccountResponse {
 
     public static AccountResponse readJson(String json) {
         AccountResponse responseObject = new Gson().fromJson(json, AccountResponse.class);
-        List<Account> accounts = new ArrayList<>();
+        List<Account> accounts = new LinkedList<>();
         for (AccountObject accountObject : responseObject.data) {
             AccountAttributes attributes = accountObject.attributes;
             Account account = null;

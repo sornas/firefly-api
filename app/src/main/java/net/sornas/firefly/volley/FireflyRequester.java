@@ -5,7 +5,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
-import net.sornas.firefly.http.HttpCallback;
+import net.sornas.firefly.api.http.HttpCallback;
 
 import java.util.HashMap;
 import java.util.Map;
