@@ -1,8 +1,6 @@
 package net.sornas.firefly.api.transaction;
 
 import net.sornas.firefly.api.account.Account;
-import net.sornas.firefly.api.account.AssetAccount;
-import net.sornas.firefly.api.account.FlowAccount;
 import net.sornas.firefly.api.budget.Budget;
 import net.sornas.firefly.api.category.Category;
 import net.sornas.firefly.api.tag.Tag;
