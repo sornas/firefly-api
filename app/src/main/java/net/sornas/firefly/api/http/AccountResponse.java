@@ -1,7 +1,7 @@
 package net.sornas.firefly.api.http;
 
 import com.google.gson.Gson;
-import net.sornas.firefly.api.account.*;
+import net.sornas.firefly.api.model.account.*;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

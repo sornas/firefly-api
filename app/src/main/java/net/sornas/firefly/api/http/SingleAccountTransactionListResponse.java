@@ -1,15 +1,15 @@
 package net.sornas.firefly.api.http;
 
 import com.google.gson.Gson;
-import net.sornas.firefly.api.account.AssetAccount;
-import net.sornas.firefly.api.account.ExpenseAccount;
-import net.sornas.firefly.api.account.RevenueAccount;
-import net.sornas.firefly.api.budget.Budget;
-import net.sornas.firefly.api.category.Category;
-import net.sornas.firefly.api.tag.Tag;
-import net.sornas.firefly.api.transaction.Deposit;
-import net.sornas.firefly.api.transaction.Transaction;
-import net.sornas.firefly.api.transaction.Withdrawal;
+import net.sornas.firefly.api.model.account.AssetAccount;
+import net.sornas.firefly.api.model.account.ExpenseAccount;
+import net.sornas.firefly.api.model.account.RevenueAccount;
+import net.sornas.firefly.api.model.budget.Budget;
+import net.sornas.firefly.api.model.category.Category;
+import net.sornas.firefly.api.model.tag.Tag;
+import net.sornas.firefly.api.model.transaction.Deposit;
+import net.sornas.firefly.api.model.transaction.Transaction;
+import net.sornas.firefly.api.model.transaction.Withdrawal;
 
 import java.util.LinkedList;
 import java.util.List;

@@ -1,10 +1,10 @@
-package net.sornas.firefly.api.transaction;
+package net.sornas.firefly.api.model.transaction;
 
-import net.sornas.firefly.api.account.AssetAccount;
-import net.sornas.firefly.api.account.ExpenseAccount;
-import net.sornas.firefly.api.budget.Budget;
-import net.sornas.firefly.api.category.Category;
-import net.sornas.firefly.api.tag.Tag;
+import net.sornas.firefly.api.model.account.AssetAccount;
+import net.sornas.firefly.api.model.account.ExpenseAccount;
+import net.sornas.firefly.api.model.budget.Budget;
+import net.sornas.firefly.api.model.category.Category;
+import net.sornas.firefly.api.model.tag.Tag;
 
 import java.time.LocalDateTime;
 import java.util.List;

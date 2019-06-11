@@ -1,4 +1,4 @@
-package net.sornas.firefly.api.category;
+package net.sornas.firefly.api.model.category;
 
 public class Category {
     private String name;

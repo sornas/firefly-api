@@ -1,4 +1,4 @@
-package net.sornas.firefly.api.budget;
+package net.sornas.firefly.api.model.budget;
 
 public class Budget {
     String name;

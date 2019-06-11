@@ -8,7 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-import net.sornas.firefly.api.account.Account;
+import net.sornas.firefly.api.model.account.Account;
 import net.sornas.firefly.api.http.AccountResponse;
 import net.sornas.firefly.volley.FireflyRequester;
 import net.sornas.firefly.volley.VolleyRequest;

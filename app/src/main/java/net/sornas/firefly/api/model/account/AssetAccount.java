@@ -1,4 +1,4 @@
-package net.sornas.firefly.api.account;
+package net.sornas.firefly.api.model.account;
 
 public class AssetAccount extends Account {
     private AssetAccountType type;

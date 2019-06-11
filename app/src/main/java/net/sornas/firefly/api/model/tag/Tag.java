@@ -1,6 +1,6 @@
-package net.sornas.firefly.api.tag;
+package net.sornas.firefly.api.model.tag;
 
-import net.sornas.firefly.api.transaction.Transaction;
+import net.sornas.firefly.api.model.transaction.Transaction;
 
 import java.util.LinkedList;
 import java.util.List;
