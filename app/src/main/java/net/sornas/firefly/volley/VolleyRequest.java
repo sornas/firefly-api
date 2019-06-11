@@ -9,17 +9,18 @@ public class VolleyRequest {
     private static final String BASE_URL = "https://firefly.xn--srns-noa9h.se/api/v1/";
 
     public static VolleyRequest listAccounts = new VolleyRequest(Method.GET, BASE_URL + "accounts");
+    public static VolleyRequest listTransactions = new VolleyRequest(Method.GET, BASE_URL + "transactions");
 
     private VolleyRequest(int method, String endpoint) {
         this.method = method;
         this.endpoint = endpoint;
     }
 
-    public int getMethod() {
+    int getMethod() {
         return method;
     }
 
-    public String getEndpoint() {
+    String getEndpoint() {
         return endpoint;
     }
 

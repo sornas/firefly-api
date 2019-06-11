@@ -103,7 +103,8 @@ public class AccountResponse {
                     break;
             }
             if (account == null) {
-                throw new IllegalStateException("Couldn't find type " + attributes.type);
+                // TODO throw new IllegalStateException("Couldn't find type " + attributes.type);
+                continue;
             }
             account.setName(attributes.name);
             account.setId(accountObject.id);

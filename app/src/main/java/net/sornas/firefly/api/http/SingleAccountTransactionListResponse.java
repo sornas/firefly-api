@@ -9,6 +9,7 @@ import net.sornas.firefly.api.model.category.Category;
 import net.sornas.firefly.api.model.tag.Tag;
 import net.sornas.firefly.api.model.transaction.Deposit;
 import net.sornas.firefly.api.model.transaction.Transaction;
+import net.sornas.firefly.api.model.transaction.Transfer;
 import net.sornas.firefly.api.model.transaction.Withdrawal;
 
 import java.util.LinkedList;
@@ -46,16 +47,24 @@ public class SingleAccountTransactionListResponse {
         }
     }
 
+    private List<Transaction> transactions;
+    private List<Deposit> deposits;
+    private List<Withdrawal> withdrawals;
+    private List<Transfer> transfers;
+
     public SingleAccountTransactionListResponse(String json) {
         SingleAccountTransactionListResponse responseObject = new Gson().fromJson(json,
                 SingleAccountTransactionListResponse.class);
-        List<Transaction> transactions = new LinkedList<>();
-        for (SingleAccountTransactionResponseData transactionData: data) {
+        transactions = new LinkedList<>();
+        deposits = new LinkedList<>();
+        withdrawals = new LinkedList<>();
+        transfers = new LinkedList<>();
+        for (SingleAccountTransactionResponseData transactionData: responseObject.data) {
             SingleAccountTransactionResponseData.SingleAccountTransactionResponseDataAttributes
                     attributes = transactionData.attributes;
             Transaction transaction;
             switch (attributes.type) {
-                case "withdrawal":
+                case "Withdrawal":
                     transaction = new Withdrawal(
                             attributes.description,
                             attributes.amount,
@@ -66,8 +75,9 @@ public class SingleAccountTransactionListResponse {
                             Budget.parse(attributes.budget_name, attributes.budget_id),
                             Tag.parse(attributes.tags)
                     );
+                    withdrawals.add((Withdrawal) transaction);
                     break;
-                case "expense":
+                case "Deposit":
                     transaction = new Deposit(
                             attributes.description,
                             attributes.amount,
@@ -78,8 +88,43 @@ public class SingleAccountTransactionListResponse {
                             Budget.parse(attributes.budget_name, attributes.budget_id),
                             Tag.parse(attributes.tags)
                     );
+                    deposits.add((Deposit) transaction);
+                    break;
+                case "Transfer":
+                    transaction = new Transfer(
+                            attributes.description,
+                            attributes.amount,
+                            attributes.date,
+                            new AssetAccount(attributes.source_name, attributes.source_id),
+                            new AssetAccount(attributes.destionation_name, attributes.destination_id),
+                            Category.parse(attributes.category_name),
+                            Budget.parse(attributes.budget_name, attributes.budget_id),
+                            Tag.parse(attributes.tags)
+                    );
+                    transfers.add((Transfer) transaction);
+                    break;
+                default:
+                    //throw new IllegalArgumentException();
+                    continue;
             }
+            transactions.add(transaction);
         }
+    }
+
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public List<Deposit> getDeposits() {
+        return deposits;
+    }
+
+    public List<Withdrawal> getWithdrawals() {
+        return withdrawals;
+    }
+
+    public List<Transfer> getTransfers() {
+        return transfers;
     }
 
     public void merge(AccountResponse accountResponse) {}  //TODO använd samma account-objekt
