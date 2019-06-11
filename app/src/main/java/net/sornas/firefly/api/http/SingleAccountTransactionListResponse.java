@@ -1,5 +1,17 @@
 package net.sornas.firefly.api.http;
 
+import com.google.gson.Gson;
+import net.sornas.firefly.api.account.AssetAccount;
+import net.sornas.firefly.api.account.ExpenseAccount;
+import net.sornas.firefly.api.account.RevenueAccount;
+import net.sornas.firefly.api.budget.Budget;
+import net.sornas.firefly.api.category.Category;
+import net.sornas.firefly.api.tag.Tag;
+import net.sornas.firefly.api.transaction.Deposit;
+import net.sornas.firefly.api.transaction.Transaction;
+import net.sornas.firefly.api.transaction.Withdrawal;
+
+import java.util.LinkedList;
 import java.util.List;
 
 public class SingleAccountTransactionListResponse {
@@ -8,9 +20,9 @@ public class SingleAccountTransactionListResponse {
     private class SingleAccountTransactionResponseData {
         String type; // "transactions" förhoppningsvis
         int id;
-        private SingleAccountTransactionResponseDataAttribute attributes;
+        private SingleAccountTransactionResponseDataAttributes attributes;
 
-        private class SingleAccountTransactionResponseDataAttribute {
+        private class SingleAccountTransactionResponseDataAttributes {
             private SingleAccountTransaction transactions;  // plural men inte en lista ??
 
             private class SingleAccountTransaction {
@@ -37,4 +49,42 @@ public class SingleAccountTransactionListResponse {
             }
         }
     }
+
+    public SingleAccountTransactionListResponse(String json) {
+        SingleAccountTransactionListResponse responseObject = new Gson().fromJson(json,
+                SingleAccountTransactionListResponse.class);
+        List<Transaction> transactions = new LinkedList<>();
+        for (SingleAccountTransactionResponseData transactionData: data) {
+            SingleAccountTransactionResponseData.SingleAccountTransactionResponseDataAttributes.SingleAccountTransaction
+                    attributes = transactionData.attributes.transactions;
+            Transaction transaction;
+            switch (attributes.type) {
+                case "withdrawal":
+                    transaction = new Withdrawal(
+                            attributes.description,
+                            attributes.amount,
+                            attributes.date,
+                            new AssetAccount(attributes.source_name, attributes.source_id),
+                            new ExpenseAccount(attributes.destionation_name, attributes.destination_id),
+                            Category.parse(attributes.category_name),
+                            Budget.parse(attributes.budget_name, attributes.budget_id),
+                            Tag.parse(attributes.tags)
+                    );
+                    break;
+                case "expense":
+                    transaction = new Deposit(
+                            attributes.description,
+                            attributes.amount,
+                            attributes.date,
+                            new RevenueAccount(attributes.source_name, attributes.source_id),
+                            new AssetAccount(attributes.destionation_name, attributes.destination_id),
+                            Category.parse(attributes.category_name),
+                            Budget.parse(attributes.budget_name, attributes.budget_id),
+                            Tag.parse(attributes.tags)
+                    );
+            }
+        }
+    }
+
+    public void merge(AccountResponse accountResponse) {}  //TODO använd samma account-objekt
 }

@@ -12,7 +12,7 @@ public class AccountResponse {
 
     private class AccountObject {
         String type;
-        String id;
+        int id;
         AccountAttributes attributes;
     }
 
@@ -80,7 +80,7 @@ public class AccountResponse {
             Account account = null;
             switch (attributes.type) {
                 case "asset":
-                    account = new AssetAccount();
+                    account = new AssetAccount(attributes.name, accountObject.id);
                     ((AssetAccount) account).setActive(true);
                     ((AssetAccount) account).setIncludeInNetWorth(true);
                     switch (attributes.account_role) {
@@ -96,16 +96,17 @@ public class AccountResponse {
                     }
                     break;
                 case "expense":
-                    account = new ExpenseAccount();
+                    account = new ExpenseAccount(attributes.name, accountObject.id);
                     break;
                 case "revenue":
-                    account = new RevenueAccount();
+                    account = new RevenueAccount(attributes.name, accountObject.id);
                     break;
             }
             if (account == null) {
                 throw new IllegalStateException("Couldn't find type " + attributes.type);
             }
             account.setName(attributes.name);
+            account.setId(accountObject.id);
             account.setAccountNumber(attributes.account_number);
             account.setBalance(attributes.current_balance);
             accounts.add(account);

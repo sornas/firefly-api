@@ -5,6 +5,10 @@ public class AssetAccount extends Account {
     private boolean active;
     private boolean includeInNetWorth;
 
+    public AssetAccount(String name, int id) {
+        super(name, id);
+    }
+
     public AssetAccountType getType() {
         return type;
     }
