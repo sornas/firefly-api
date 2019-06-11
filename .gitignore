@@ -92,3 +92,5 @@ lint/outputs/
 lint/tmp/
 # lint/reports/
 /.idea/markdown-navigator.xml
+/.idea/markdown-exported-files.xml
+/.idea/markdown-navigator/profiles_settings.xml
