@@ -1,6 +1,8 @@
 package net.sornas.firefly.api.http;
 
+import android.util.Log;
 import com.google.gson.Gson;
+import net.sornas.firefly.MainActivity;
 import net.sornas.firefly.api.model.account.AssetAccount;
 import net.sornas.firefly.api.model.account.ExpenseAccount;
 import net.sornas.firefly.api.model.account.RevenueAccount;
@@ -34,8 +36,8 @@ public class SingleAccountTransactionListResponse {
                                 // Initial balance account, Beneficiary account, Import account,
                                 // Reconciliation account, Loan, Debt, Mortgage ]
             int destination_id;
-            String destionation_name;
-            String destionation_type; // se source_type
+            String destination_name;
+            String destination_type; // se source_type
             int budget_id;
             String budget_name;
             String category_name;
@@ -63,6 +65,7 @@ public class SingleAccountTransactionListResponse {
             SingleAccountTransactionResponseData.SingleAccountTransactionResponseDataAttributes
                     attributes = transactionData.attributes;
             Transaction transaction;
+            Log.v(MainActivity.TAG, "Reading transaction " + attributes.description + " with type " + attributes.type);
             switch (attributes.type) {
                 case "Withdrawal":
                     transaction = new Withdrawal(
@@ -70,7 +73,7 @@ public class SingleAccountTransactionListResponse {
                             attributes.amount,
                             attributes.date,
                             new AssetAccount(attributes.source_name, attributes.source_id),
-                            new ExpenseAccount(attributes.destionation_name, attributes.destination_id),
+                            new ExpenseAccount(attributes.destination_name, attributes.destination_id),
                             Category.parse(attributes.category_name),
                             Budget.parse(attributes.budget_name, attributes.budget_id),
                             Tag.parse(attributes.tags)
@@ -83,7 +86,7 @@ public class SingleAccountTransactionListResponse {
                             attributes.amount,
                             attributes.date,
                             new RevenueAccount(attributes.source_name, attributes.source_id),
-                            new AssetAccount(attributes.destionation_name, attributes.destination_id),
+                            new AssetAccount(attributes.destination_name, attributes.destination_id),
                             Category.parse(attributes.category_name),
                             Budget.parse(attributes.budget_name, attributes.budget_id),
                             Tag.parse(attributes.tags)
@@ -96,7 +99,7 @@ public class SingleAccountTransactionListResponse {
                             attributes.amount,
                             attributes.date,
                             new AssetAccount(attributes.source_name, attributes.source_id),
-                            new AssetAccount(attributes.destionation_name, attributes.destination_id),
+                            new AssetAccount(attributes.destination_name, attributes.destination_id),
                             Category.parse(attributes.category_name),
                             Budget.parse(attributes.budget_name, attributes.budget_id),
                             Tag.parse(attributes.tags)
@@ -104,9 +107,9 @@ public class SingleAccountTransactionListResponse {
                     transfers.add((Transfer) transaction);
                     break;
                 default:
-                    //throw new IllegalArgumentException();
-                    continue;
+                    throw new IllegalStateException("Unexpected value: " + attributes.type);
             }
+            Log.v(MainActivity.TAG, "Added transaction " + attributes.description);
             transactions.add(transaction);
         }
     }

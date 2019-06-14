@@ -5,7 +5,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
-import net.sornas.firefly.api.http.HttpCallback;
+import net.sornas.firefly.api.http.Pagination;
+import net.sornas.firefly.api.http.ResponseCallback;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,13 +14,7 @@ import java.util.Map;
 public class FireflyRequester {
     private class FireflyResponse {
         private class ResponseMeta {
-            private ResponseMetaPagination pagination;
-            private class ResponseMetaPagination {
-                private int total;
-                private int count;
-                private int per_page;
-                private int current_page;
-            }
+            private Pagination pagination;
         }
         private class ResponseLinks {
             private String self = null;
@@ -39,7 +34,7 @@ public class FireflyRequester {
         requestQueue = Volley.newRequestQueue(context);
     }
 
-    private void makeRequest(int method, String url, String token, final HttpCallback callback) {
+    private void makeRequest(int method, String url, String token, final ResponseCallback callback) {
         StringRequest stringRequest = new StringRequest(method,
                 url,
                 s -> {
@@ -47,7 +42,7 @@ public class FireflyRequester {
                     if (response.links.next != null) {
                         makeRequest(method, response.links.next, token, callback);
                     }
-                    callback.onSuccess(s);
+                    callback.onSuccess(s, response.meta.pagination);
                 },
                 e -> {})
         {
@@ -61,7 +56,7 @@ public class FireflyRequester {
         requestQueue.add(stringRequest);
     }
 
-    public void makeRequest(VolleyRequest request, String token, final HttpCallback callback) {
-        makeRequest(request.getMethod(), request.getEndpoint(), token, callback);
+    public void makeRequest(VolleyRequest request, String token, final ResponseCallback responseCallback) {
+        makeRequest(request.getMethod(), request.getEndpoint(), token, responseCallback);
     }
 }
