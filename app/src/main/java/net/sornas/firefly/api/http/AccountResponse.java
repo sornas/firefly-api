@@ -1,8 +1,6 @@
 package net.sornas.firefly.api.http;
 
-import android.util.Log;
 import com.google.gson.Gson;
-import net.sornas.firefly.MainActivity;
 import net.sornas.firefly.api.model.account.*;
 
 import java.util.ArrayList;

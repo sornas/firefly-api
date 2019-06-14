@@ -1,8 +1,6 @@
 package net.sornas.firefly.api.http;
 
-import android.util.Log;
 import com.google.gson.Gson;
-import net.sornas.firefly.MainActivity;
 import net.sornas.firefly.api.model.account.AssetAccount;
 import net.sornas.firefly.api.model.account.ExpenseAccount;
 import net.sornas.firefly.api.model.account.RevenueAccount;
@@ -65,7 +63,6 @@ public class SingleAccountTransactionListResponse {
             SingleAccountTransactionResponseData.SingleAccountTransactionResponseDataAttributes
                     attributes = transactionData.attributes;
             Transaction transaction;
-            Log.v(MainActivity.TAG, "Reading transaction " + attributes.description + " with type " + attributes.type);
             switch (attributes.type) {
                 case "Withdrawal":
                     transaction = new Withdrawal(
@@ -109,7 +106,6 @@ public class SingleAccountTransactionListResponse {
                 default:
                     throw new IllegalStateException("Unexpected value: " + attributes.type);
             }
-            Log.v(MainActivity.TAG, "Added transaction " + attributes.description);
             transactions.add(transaction);
         }
     }
