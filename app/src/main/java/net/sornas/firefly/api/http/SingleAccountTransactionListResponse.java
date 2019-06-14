@@ -70,7 +70,7 @@ public class SingleAccountTransactionListResponse {
                             attributes.amount,
                             attributes.date,
                             new AssetAccount(attributes.source_name, attributes.source_id),
-                            new ExpenseAccount(attributes.destionation_name, attributes.destination_id),
+                            new ExpenseAccount(attributes.destination_name, attributes.destination_id),
                             Category.parse(attributes.category_name),
                             Budget.parse(attributes.budget_name, attributes.budget_id),
                             Tag.parse(attributes.tags)
@@ -83,7 +83,7 @@ public class SingleAccountTransactionListResponse {
                             attributes.amount,
                             attributes.date,
                             new RevenueAccount(attributes.source_name, attributes.source_id),
-                            new AssetAccount(attributes.destionation_name, attributes.destination_id),
+                            new AssetAccount(attributes.destination_name, attributes.destination_id),
                             Category.parse(attributes.category_name),
                             Budget.parse(attributes.budget_name, attributes.budget_id),
                             Tag.parse(attributes.tags)
@@ -96,7 +96,7 @@ public class SingleAccountTransactionListResponse {
                             attributes.amount,
                             attributes.date,
                             new AssetAccount(attributes.source_name, attributes.source_id),
-                            new AssetAccount(attributes.destionation_name, attributes.destination_id),
+                            new AssetAccount(attributes.destination_name, attributes.destination_id),
                             Category.parse(attributes.category_name),
                             Budget.parse(attributes.budget_name, attributes.budget_id),
                             Tag.parse(attributes.tags)
