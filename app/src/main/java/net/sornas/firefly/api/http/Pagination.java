@@ -5,4 +5,5 @@ public class Pagination {
     public int count;
     public int per_page;
     public int current_page;
+    public int total_pages;
 }

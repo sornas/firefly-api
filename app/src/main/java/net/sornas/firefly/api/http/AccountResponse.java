@@ -1,6 +1,8 @@
 package net.sornas.firefly.api.http;
 
+import android.util.Log;
 import com.google.gson.Gson;
+import net.sornas.firefly.MainActivity;
 import net.sornas.firefly.api.model.account.*;
 
 import java.util.ArrayList;
@@ -101,10 +103,21 @@ public class AccountResponse {
                 case "revenue":
                     account = new RevenueAccount(attributes.name, accountObject.id);
                     break;
+                case "liabilities":
+                    account = new LiabilityAccount(attributes.name, accountObject.id);
+                    break;
+                case "cash":
+                    account = new CashAccount(attributes.name, accountObject.id);
+                    break;
+                case "initial-balance":
+                    account = new InitialBalanceAccount(attributes.name, accountObject.id);
+                    break;
+                case "reconciliation":
+                    account = new ReconciliationAccount(attributes.name, accountObject.id);
+                    break;
             }
             if (account == null) {
-                // TODO throw new IllegalStateException("Couldn't find type " + attributes.type);
-                continue;
+                throw new IllegalStateException("Couldn't find type " + attributes.type);
             }
             account.setName(attributes.name);
             account.setId(accountObject.id);
@@ -138,6 +151,7 @@ public class AccountResponse {
             if (account instanceof RevenueAccount)
                 revenueAccounts.add((RevenueAccount) account);
         response.revenueAccounts = revenueAccounts;
+
 
         return response;
     }

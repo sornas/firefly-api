@@ -44,20 +44,26 @@ public class MainActivity extends AppCompatActivity {
 
         FireflyRequester requester = new FireflyRequester(this);
 
+        final int[] transactionPages = {0};
+        final boolean[] transactionsDone = {false};  //TODO gillar inte det här
         requester.makeRequest(VolleyRequest.listTransactions, token,
                 (s, pagination) -> {
+                    transactionPages[0]++;
                     SingleAccountTransactionListResponse response = new SingleAccountTransactionListResponse(s);
                     transactions.addAll(response.getTransactions());
                     Log.d(TAG, transactions.size() + " transactions total, maximum is " + pagination.total);
-                    if (pagination.total - transactions.size() < pagination.per_page)
+                    if (transactionPages[0] == pagination.total_pages) {
                         Log.d(TAG, "finished with transactions");
+                        transactionsDone[0] = true;
+                    }
+
                 });
         requester.makeRequest(VolleyRequest.listAccounts, token,
                 (s, pagination) -> {
                     AccountResponse response = AccountResponse.readJson(s);
                     accounts.addAll(response.getAccounts());
                     Log.d(TAG, accounts.size() + " accounts total, maximum is " + pagination.total);
-                    if (pagination.total - accounts.size() < pagination.per_page)
+                    if (accounts.size() == pagination.total)
                         Log.d(TAG, "finished with accounts");
                 });
     }
