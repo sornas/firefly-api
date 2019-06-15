@@ -1,13 +1,12 @@
 package net.sornas.firefly;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 import net.sornas.firefly.api.http.AccountResponse;
 import net.sornas.firefly.api.http.SingleAccountTransactionListResponse;
 import net.sornas.firefly.api.model.account.Account;
@@ -34,12 +33,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        TextView textViewTest = findViewById(R.id.textview_test);
-
-        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
             //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
             //        .setAction("Action", null).show();
