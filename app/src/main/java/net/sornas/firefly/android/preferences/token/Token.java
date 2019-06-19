@@ -1,4 +1,4 @@
-package net.sornas.firefly.android;
+package net.sornas.firefly.android.preferences.token;
 
 import java.io.Serializable;
 

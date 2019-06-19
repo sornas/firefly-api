@@ -1,6 +1,5 @@
-package net.sornas.firefly.android;
+package net.sornas.firefly.android.preferences;
 
-import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import net.sornas.firefly.R;

@@ -1,4 +1,4 @@
-package net.sornas.firefly.android;
+package net.sornas.firefly.android.preferences.token;
 
 import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,9 +8,9 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import net.sornas.firefly.R;
+import net.sornas.firefly.android.SerializableManager;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class TokenChooserActivity extends AppCompatActivity {  // TODO convert into fragment
                                                                // replace SettingsFragment in SettingsActivity

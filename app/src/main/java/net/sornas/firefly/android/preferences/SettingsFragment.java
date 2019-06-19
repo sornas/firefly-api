@@ -1,4 +1,4 @@
-package net.sornas.firefly.android;
+package net.sornas.firefly.android.preferences;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.preference.PreferenceFragmentCompat;
 import net.sornas.firefly.R;
+import net.sornas.firefly.android.preferences.token.TokenChooserActivity;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
 

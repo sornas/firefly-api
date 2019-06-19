@@ -2,7 +2,6 @@ package net.sornas.firefly.android;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import net.sornas.firefly.R;
+import net.sornas.firefly.android.preferences.SettingsActivity;
 import net.sornas.firefly.api.http.AccountResponse;
 import net.sornas.firefly.api.http.SingleAccountTransactionListResponse;
 import net.sornas.firefly.api.model.account.Account;

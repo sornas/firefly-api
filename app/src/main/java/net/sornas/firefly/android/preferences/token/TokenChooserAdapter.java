@@ -1,4 +1,4 @@
-package net.sornas.firefly.android;
+package net.sornas.firefly.android.preferences.token;
 
 import android.view.LayoutInflater;
 import android.view.View;
