@@ -56,7 +56,7 @@ public class FireflyRequester {
         requestQueue.add(stringRequest);
     }
 
-    public void makeRequest(VolleyRequest request, String token, final ResponseCallback responseCallback) {
-        makeRequest(request.getMethod(), request.getEndpoint(), token, responseCallback);
+    public void makeRequest(VolleyRequest request, String token, String rootURL, final ResponseCallback responseCallback) {
+        makeRequest(request.getMethod(), rootURL + request.getEndpoint(), token, responseCallback);
     }
 }

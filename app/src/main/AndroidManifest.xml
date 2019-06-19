@@ -12,11 +12,18 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
-                android:name=".SettingsActivity"
-                android:label="@string/title_activity_settings">
+                android:name=".android.TokenChooserActivity"
+                android:label="@string/title_activity_token_chooser"
+                android:parentActivityName=".android.SettingsActivity"
+                android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="net.sornas.firefly.android.SettingsActivity"/>
+        </activity>
+        <activity android:name=".android.SettingsActivity">
         </activity>
         <activity
-                android:name=".MainActivity"
+                android:name=".android.MainActivity"
                 android:label="@string/app_name"
                 android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
