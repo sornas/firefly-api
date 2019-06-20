@@ -23,8 +23,6 @@ public class TokenChooserAdapter extends RecyclerView.Adapter<TokenChooserAdapte
     @NonNull
     @Override
     public TokenChooserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Log.v("TokenChooser", "Creating ViewHolder");
-
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.token_chooser_view, parent, false);
 
         return new TokenChooserViewHolder(view);

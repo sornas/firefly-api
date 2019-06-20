@@ -40,9 +40,7 @@ public class MainActivity extends AppCompatActivity {
         Log.v("MainActivity", "onCreate");
 
         super.onCreate(savedInstanceState);
-        Log.v("MainActivity", "Setting ContentView");
         setContentView(R.layout.activity_main);
-        Log.v("MainActivity", "Setting SupportActionBar");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -102,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Log.v("MainActivity", "Starting SettingsActivity");
             Intent settingsIntent = new Intent(this, SettingsActivity.class);
             startActivity(settingsIntent);
         }

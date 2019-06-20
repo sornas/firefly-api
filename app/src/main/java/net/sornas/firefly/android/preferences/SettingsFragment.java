@@ -15,15 +15,11 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.preferences, rootKey);
-
-        Log.v("SettingsFragment", "Set preferences from resource");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.v("SettingsFragment", "Setting ClickListeners");
         findPreference("token").setOnPreferenceClickListener(preference -> {
-            Log.v("tokenPreference", "Caught click, starting");
             Intent tokenChooserIntent = new Intent(getContext(), TokenChooserActivity.class);
             startActivity(tokenChooserIntent);
             return true;
