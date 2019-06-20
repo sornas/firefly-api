@@ -1,6 +1,7 @@
 package net.sornas.firefly.android.preferences.token;
 
 import android.os.Bundle;
+import android.util.Log;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -50,6 +51,7 @@ public class TokenChooserActivity extends AppCompatActivity {  // TODO convert i
         recyclerView.setLayoutManager(layoutManager);
 
         adapter = new TokenChooserAdapter(dataset);
+        Log.d("TokenChooser", "Setting adapter with " + dataset.size() + " tokens");
         recyclerView.setAdapter(adapter);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

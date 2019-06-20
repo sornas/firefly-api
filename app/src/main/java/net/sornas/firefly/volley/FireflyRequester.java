@@ -1,6 +1,7 @@
 package net.sornas.firefly.volley;
 
 import android.content.Context;
+import android.util.Log;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -35,6 +36,8 @@ public class FireflyRequester {
     }
 
     private void makeRequest(int method, String url, String token, final ResponseCallback callback) {
+        Log.d("FireflyRequest", "Making request:\n\tMethod: " + method + "\n\turl: " + url +
+                "\n\ttoken" + token);
         StringRequest stringRequest = new StringRequest(method,
                 url,
                 s -> {
@@ -42,9 +45,11 @@ public class FireflyRequester {
                     if (response.links.next != null) {
                         makeRequest(method, response.links.next, token, callback);
                     }
+                    Log.d("FireflyRequest", "Request success, returning " + response.meta.pagination.count +
+                            " posts");
                     callback.onSuccess(s, response.meta.pagination);
                 },
-                e -> {})
+                e -> Log.e("FireflyRequest", "Error: " + e.toString()))
         {
             @Override
             public Map<String, String> getHeaders() {

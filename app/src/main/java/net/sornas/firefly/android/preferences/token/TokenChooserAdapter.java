@@ -1,5 +1,6 @@
 package net.sornas.firefly.android.preferences.token;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,8 @@ public class TokenChooserAdapter extends RecyclerView.Adapter<TokenChooserAdapte
     @NonNull
     @Override
     public TokenChooserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        Log.v("TokenChooser", "Creating ViewHolder");
+
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.token_chooser_view, parent, false);
 
         return new TokenChooserViewHolder(view);
@@ -30,6 +33,7 @@ public class TokenChooserAdapter extends RecyclerView.Adapter<TokenChooserAdapte
     @Override
     public void onBindViewHolder(@NonNull TokenChooserViewHolder holder, int position) {
         Token token = dataset.get(position);
+        Log.d("TokenChooser", "Binding token " + token.getName() + " with position " + position);
 
         holder.textViewName.setText(token.getName());
         holder.textViewURL.setText(token.getUrl());
