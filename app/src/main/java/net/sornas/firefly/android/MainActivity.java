@@ -20,15 +20,15 @@ import net.sornas.firefly.volley.VolleyRequest;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements RequestsDoneCallback {
 
     public static final String TAG = "FireflySörnäs";
+    private boolean DEBUG = true;
 
-    private final int listAccounts = 0;
-    private final int listTransactions = 1;
-    private boolean[] requestsDone = {false, false};
-    private int transactionPages = 0;
+    private short requestsDone = 0;
+    private short requestsTotal = 0;
     private List<Account> accounts = new LinkedList<>();
     private List<Transaction> transactions = new LinkedList<>();
 
@@ -50,8 +50,16 @@ public class MainActivity extends AppCompatActivity {
             //        .setAction("Action", null).show();
         });
 
+        if (!DEBUG) doRequests();
+        else readSampleRequests();
+    }
+
+    private int transactionPages;
+    private void doRequests() {
         FireflyRequester requester = new FireflyRequester(this);
 
+        requestsTotal++;
+        transactionPages = 0;
         Log.d("MainActivity", "Requesting transactions on url " + rootURL + " with token " + token);
         requester.makeRequest(VolleyRequest.listTransactions, token, rootURL,
                 (s, pagination) -> {
@@ -61,17 +69,53 @@ public class MainActivity extends AppCompatActivity {
                     Log.i("makeRequest", "Received page " + transactionPages + "/" + pagination.total_pages +
                             " (" + response.getTransactions().size() + "), " +
                             transactions.size() + "/" + pagination.total + " transactions");
-                    if (transactionPages == pagination.total_pages) requestsDone[listTransactions] = true;
+                    if (transactionPages == pagination.total_pages) {
+                        requestsDone++;
+                        if (requestsDone == requestsTotal) this.onRequestsDone();
+                    }
                 });
 
+        requestsTotal++;
         Log.d("MainActivity", "Requesting accounts on url " + rootURL + " with token " + token);
         requester.makeRequest(VolleyRequest.listAccounts, token, rootURL,
                 (s, pagination) -> {
                     AccountResponse response = AccountResponse.readJson(s);
                     accounts.addAll(response.getAccounts());
-                    Log.i("makeRequest", "Received " + response.getAccounts().size() + "/" + pagination.total + " accounts");
-                    if (accounts.size() == pagination.total) requestsDone[listAccounts] = true;
+                    Log.i("makeRequest", "Received " + response.getAccounts().size() + "/" +
+                            pagination.total + " accounts");
+                    if (accounts.size() == pagination.total) {
+                        if (requestsDone == requestsTotal) this.onRequestsDone();
+                    }
                 });
+    }
+
+    private void readSampleRequests() {
+        Log.e("MainActivity", "Reading sample requests.");
+        Scanner sc;
+        StringBuilder builder;
+
+        sc = new Scanner(getResources().openRawResource(R.raw.sample_transactions));
+        builder = new StringBuilder();
+        while (sc.hasNext())
+            builder.append(sc.next());
+        SingleAccountTransactionListResponse transactionResponse = new SingleAccountTransactionListResponse(
+                builder.toString());
+        transactions.addAll(transactionResponse.getTransactions());
+
+        sc = new Scanner(getResources().openRawResource(R.raw.sample_accounts));
+        builder = new StringBuilder();
+        while (sc.hasNext())
+            builder.append(sc.next());
+        AccountResponse accountResponse = AccountResponse.readJson(builder.toString());
+        accounts.addAll(accountResponse.getAccounts());
+
+        this.onRequestsDone();
+    }
+
+    @Override
+    public void onRequestsDone() {
+        Log.d("MainActivity", String.format("Requests done: %d transactions, %d accounts.",
+                transactions.size(), accounts.size()));
     }
 
     @Override
