@@ -42,9 +42,8 @@
                     app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="16dp"
                     android:textColor="@android:color/black"/>
             <com.google.android.material.button.MaterialButton
-                    android:text="Intäkt"
                     style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+                    android:text="Intäkt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/button"
                     android:layout_marginBottom="8dp"
@@ -52,9 +51,8 @@
                     app:layout_constraintStart_toStartOf="parent"
             />
             <com.google.android.material.button.MaterialButton
-                    android:text="Utgift"
                     style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+                    android:text="Utgift"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/button2"
                     app:layout_constraintStart_toEndOf="@+id/button" android:layout_marginStart="8dp"
