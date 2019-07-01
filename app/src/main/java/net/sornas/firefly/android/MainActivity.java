@@ -46,9 +46,17 @@ public class MainActivity extends AppCompatActivity implements RequestsDoneCallb
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
-            //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-            //        .setAction("Action", null).show();
+            // TEST
+            startActivity(new Intent(this, CreateTransactionActivity.class));
         });
+
+        findViewById(R.id.main_button_income).setOnClickListener(v ->
+                startActivity(new Intent(this, CreateTransactionActivity.class).putExtra(
+                        CreateTransactionActivity.TYPE, CreateTransactionActivity.TYPE_INCOME)));
+
+        findViewById(R.id.main_button_expense).setOnClickListener(v ->
+                startActivity(new Intent(this, CreateTransactionActivity.class).putExtra(
+                        CreateTransactionActivity.TYPE, CreateTransactionActivity.TYPE_EXPENSE)));
 
         if (!DEBUG) doRequests();
         else readSampleRequests();
