@@ -58,12 +58,12 @@ public class CreateTransactionActivity extends AppCompatActivity {
     }
 
     private void enableButton(MaterialButton button) {
-        button.setBackgroundTintList(getColorStateList(R.color.colorAccent));
-        button.setTextColor(getColor(R.color.white));
+        button.setBackgroundTintList(getColorStateList(R.color.colorSecondary));
+        button.setTextColor(getColor(R.color.colorOnSecondary));
     }
 
     private void disableButton(MaterialButton button) {
-        button.setBackgroundTintList(getColorStateList(R.color.white));
-        button.setTextColor(getColor(R.color.colorAccent));
+        button.setBackgroundTintList(getColorStateList(R.color.colorSurface));
+        button.setTextColor(getColor(R.color.colorOnSurface));
     }
 }
